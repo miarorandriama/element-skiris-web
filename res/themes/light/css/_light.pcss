@@ -373,4 +373,162 @@ body {
     background: var(--cpd-color-red-500);
 }
 
+.mx_AIButton {
+    position: relative;
+    display: inline-block;
+}
+
+.mx_AIButton_main {
+    background: #0dbd8b;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    min-width: 80px;
+}
+
+.mx_AIButton_main:hover {
+    background: #0ba175;
+    transform: translateY(-1px);
+}
+
+.mx_AIButton_main:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.mx_AIButton--error {
+    background: #ff4b55 !important;
+    animation: shake 0.5s ease-in-out;
+}
+
+.mx_AIButton--recording {
+    background: #ff6b6b !important;
+    animation: pulse 1s infinite;
+}
+
+.mx_AIButton--loading {
+    background: #ffa726 !important;
+}
+
+.mx_AIButton_menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    min-width: 200px;
+    margin-top: 4px;
+    padding: 8px 0;
+}
+
+.mx_AIButton_section {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.mx_AIButton_section:last-child {
+    border-bottom: none;
+}
+
+.mx_AIButton_section h4 {
+    margin: 0 0 8px 0;
+    padding: 0 16px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.mx_AIButton_option {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 8px 16px;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.mx_AIButton_option:hover {
+    background: #f5f8fa;
+}
+
+.mx_AIButton_option:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.mx_AIButton_option:disabled:hover {
+    background: transparent;
+}
+
+.mx_AIButton_error {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #ff4b55;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-top: 4px;
+    z-index: 1001;
+}
+
+/* Animations */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .mx_AIButton_menu {
+        position: fixed;
+        top: auto;
+        bottom: 20px;
+        left: 20px;
+        right: 20px;
+        width: auto;
+    }
+}
+
+/* Dark theme support */
+.mx_Theme_dark .mx_AIButton_menu {
+    background: #2d2d2d;
+    border-color: #555;
+    color: white;
+}
+
+.mx_Theme_dark .mx_AIButton_section {
+    border-color: #555;
+}
+
+.mx_Theme_dark .mx_AIButton_section h4 {
+    color: #ccc;
+}
+
+.mx_Theme_dark .mx_AIButton_option:hover {
+    background: #3d3d3d;
+}
+
 /* ******************** */
