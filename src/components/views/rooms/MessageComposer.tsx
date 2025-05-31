@@ -54,6 +54,8 @@ import { type MatrixClientProps, withMatrixClientHOC } from "../../../contexts/M
 import { UIFeature } from "../../../settings/UIFeature";
 import { formatTimeLeft } from "../../../DateUtils";
 import RoomReplacedSvg from "../../../../res/img/room_replaced.svg";
+import { AIButton } from './AIIntegration/AIButton';
+
 
 // The prefix used when persisting editor drafts to localstorage.
 export const WYSIWYG_EDITOR_STATE_STORAGE_PREFIX = "mx_wysiwyg_state_";
@@ -259,6 +261,25 @@ export class MessageComposer extends React.Component<IProps, IState> {
             });
         }
     };
+
+    private getSelectedText(): string {
+        const selection = window.getSelection();
+        return selection?.toString() || '';
+    }
+
+    private insertText = (text: string): void => {
+        // Version simple - à adapter selon l'éditeur utilisé
+        const textarea = document.querySelector('.mx_BasicMessageComposer_input') as HTMLTextAreaElement;
+        if (textarea) {
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const currentValue = textarea.value;
+            const newValue = currentValue.substring(0, start) + text + currentValue.substring(end);
+            textarea.value = newValue;
+            textarea.selectionStart = textarea.selectionEnd = start + text.length;
+            textarea.focus();
+        }
+    }
 
     private onAction = (payload: ActionPayload): void => {
         switch (payload.action) {
@@ -534,6 +555,12 @@ export class MessageComposer extends React.Component<IProps, IState> {
 
         const controls: ReactNode[] = [];
         const menuPosition = this.getMenuPosition();
+
+        <AIButton 
+            selectedText={this.getSelectedText?.()} // à définir
+            onTextInsert={this.insertText?.bind(this)} // à définir
+            className="mx_MessageComposer_button"
+        />
 
         const canSendMessages = this.context.canSendMessages && !this.context.tombstone;
         let composer: ReactNode;
